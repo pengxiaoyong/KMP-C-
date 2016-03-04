@@ -1,0 +1,63 @@
+#include<iostream>
+#include<cstring>
+using namespace std;
+int *q;
+int index(char *s,char *t)
+{
+ int s1=strlen(s),t1=strlen(t);
+ int i=0,j=0,goal=0;
+  while(i<s1-t1&&j<t1)
+  {
+     
+ 	if(s[i]==t[j]||j==-1)
+ 	{
+ 	i++;j++;		 
+ 	}
+    else
+ 	 j=q[j];
+     if(j==t1)
+     { 
+     goal=i-t1+1;
+ 	 break;
+     }
+  }
+ return goal;
+}
+
+void getnext(char *p)
+{
+ int a=strlen(p);
+ int i=-1,j=0;
+ q[0]=-1;
+ while(j<a)
+ {
+ 	if(i==-1||p[i]==p[j])
+ 	{
+	 	++i;++j;
+	 	q[j]=i;
+	 }
+	 else
+	 i=q[i];
+ }
+} 
+
+int main()
+{system(" color 1e");
+ char *s;
+ cout<<"请输入主串:";
+  s=new char[100];
+ cin>>s;
+ cout<<"请输入子串:";
+ char *t=new char[100];
+ cin>>t;
+ 
+ int num=strlen(t);
+ q=new int[num];
+ getnext(t);
+ int goal=index(s,t);
+ if(goal==0)
+ cout<<"查找失败!"<<endl;
+ else
+ cout<<"字串在主串的位置为第"<<goal<<"位!"<<endl;
+ return 0;
+}
